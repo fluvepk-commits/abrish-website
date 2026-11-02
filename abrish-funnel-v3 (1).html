@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abrish Arshad | Websites for Salons & Cafes</title>
+<meta name="description" content="Websites for salons and cafes that turn nearby searches into bookings and walk-ins. Message Abrish on Instagram.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Kaushan+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a171e; --ink2:#10262f; --bone:#eceee9; --paper:#f6f7f4;
+  --mint:#a8e6cf; --teal:#2f7f86; --line:rgba(10,23,30,.14); --line-d:rgba(236,238,233,.16);
+  --g:clamp(18px,2.6vw,40px); --ease:cubic-bezier(.19,1,.22,1); --p:0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.lock{overflow:hidden;height:100vh}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.wrap{max-width:1480px;margin:0 auto;padding:0 var(--g);position:relative;z-index:2}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--g)}
+section{position:relative;padding:clamp(90px,12vw,170px) 0}
+.disp{font-family:'Inter Tight',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-.045em;line-height:.9}
+h2.disp{font-size:clamp(38px,6.4vw,100px)}
+.dark{background:var(--ink);color:var(--bone)}
+.accent{color:var(--mint)}
+.lower{text-transform:none;letter-spacing:-.04em;font-style:italic;font-weight:700}
+grain{display:none}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9000;opacity:.05;mix-blend-mode:multiply;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* ---------- text reveal ---------- */
+.ln{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
+.ln>span{display:block;transform:translateY(112%);transition:transform 1.25s var(--ease);transition-delay:calc(var(--i,0)*95ms + var(--d,0ms))}
+.in .ln>span,.ln.in>span{transform:none}
+.wm{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+.wi{display:inline-block;transform:translateY(112%);transition:transform 1s var(--ease);transition-delay:calc(var(--w,0)*22ms + var(--d,0ms))}
+.in .wi{transform:none}
+.fu{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0ms)}
+.in.fu,.in .fu{opacity:1;transform:none}
+.scrub .w{opacity:.16;transition:opacity .25s linear}
+
+/* ---------- loader ---------- */
+.loader{position:fixed;inset:0;z-index:10000;background:var(--ink);color:var(--bone);display:flex;flex-direction:column;justify-content:space-between;padding:var(--g);
+ transition:transform 1.1s cubic-bezier(.76,0,.24,1)}
+.loader.out{transform:translateY(-100%)}
+.loader.out .ld-mid,.loader.out .ld-top,.loader.out .ld-bot{opacity:0;transition:opacity .4s}
+.ld-top{display:flex;justify-content:space-between;opacity:.7}
+.ld-mid{flex:1;display:grid;place-items:center}
+.ld-logo{font-family:'Kaushan Script',cursive;font-size:clamp(54px,11vw,150px);line-height:.88;display:flex;flex-direction:column;color:var(--bone);clip-path:inset(0 100% 0 0);animation:wipe 1.5s .25s var(--ease) forwards}
+.ld-logo span:last-child{margin-left:.55em}
+@keyframes wipe{to{clip-path:inset(-10% -10% -10% -10%)}}
+.ld-bot{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--g)}
+.ld-count{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(70px,14vw,200px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.ld-count i{font-style:normal;font-size:.35em;vertical-align:top;color:var(--mint);margin-left:.1em}
+.ld-bar{flex:1;max-width:46%;height:2px;background:rgba(236,238,233,.15);margin-bottom:12px;overflow:hidden}
+.ld-bar b{display:block;height:100%;background:var(--mint);transform-origin:left;transform:scaleX(0)}
+
+/* ---------- header / menu ---------- */
+.hd{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:22px var(--g);color:#fff;mix-blend-mode:difference}
+.lg{font-family:'Kaushan Script',cursive;font-size:28px;line-height:.85;display:flex;flex-direction:column}
+.lg span:last-child{margin-left:16px}
+.hd .tag{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px}
+.hd .tag::before{content:"";width:7px;height:7px;border-radius:50%;background:#fff;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.mn{display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.mn i{display:block;width:30px;height:8px;position:relative}
+.mn i::before,.mn i::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:#fff;transition:transform .5s var(--ease)}
+.mn i::before{top:0}.mn i::after{bottom:0}
+.menu-open .mn i::before{transform:translateY(3.2px) rotate(45deg)}
+.menu-open .mn i::after{transform:translateY(-3.2px) rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:400;background:var(--ink);color:var(--bone);clip-path:circle(0 at calc(100% - 60px) 38px);transition:clip-path 1s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column;justify-content:flex-end;padding:100px var(--g) var(--g);
+ background:radial-gradient(800px 500px at 80% 0%,rgba(47,127,134,.35),transparent 60%),var(--ink)}
+.menu-open .menu{clip-path:circle(150% at calc(100% - 60px) 38px)}
+.menu ol{list-style:none;margin-bottom:5vh}
+.menu li{border-top:1px solid var(--line-d)}
+.menu li a{display:flex;align-items:baseline;gap:22px;padding:14px 0;font-family:'Inter Tight',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-.04em;font-size:clamp(40px,8vw,112px);line-height:.95;transition:color .3s,padding-left .5s var(--ease)}
+.menu li a small{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--mint);font-weight:400}
+.menu li a:hover{color:var(--mint);padding-left:18px}
+.menu .ml{overflow:hidden;display:block}
+.menu .ml>span{display:flex;align-items:baseline;gap:22px;transform:translateY(110%);transition:transform 1s var(--ease)}
+.menu-open .menu .ml>span{transform:none}
+.menu-open .menu li:nth-child(1) .ml>span{transition-delay:.35s}.menu-open .menu li:nth-child(2) .ml>span{transition-delay:.42s}
+.menu-open .menu li:nth-child(3) .ml>span{transition-delay:.49s}.menu-open .menu li:nth-child(4) .ml>span{transition-delay:.56s}
+.menu-open .menu li:nth-child(5) .ml>span{transition-delay:.63s}
+.menu-foot{display:flex;justify-content:space-between;gap:var(--g);flex-wrap:wrap;color:rgba(236,238,233,.7)}
+.menu-foot a:hover{color:var(--mint)}
+
+/* ---------- buttons ---------- */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:18px;padding:9px 9px 9px 30px;border-radius:99px;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;
+ background:var(--ink);color:var(--bone);transition:transform .4s var(--ease),box-shadow .4s}
+.btn::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(168,230,207,.35) 50%,transparent 70%);transform:translateX(-130%);transition:transform .9s ease}
+.btn:hover::before{transform:translateX(130%)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 22px 40px -18px rgba(10,23,30,.6)}
+.btn .t,.btn .arr{position:relative;z-index:1}
+.btn .arr{flex:none;width:44px;height:44px;border-radius:50%;background:var(--mint);color:var(--ink);display:grid;place-items:center;overflow:hidden;transition:transform .4s var(--ease)}
+.btn .arr svg{position:absolute;width:18px;height:18px;transition:transform .55s cubic-bezier(.65,0,.35,1)}
+.btn .arr svg:first-child{animation:nudge 2.8s ease-in-out infinite}
+.btn .arr svg:last-child{transform:translateX(-36px)}
+.btn:hover .arr{transform:scale(1.08)}
+.btn:hover .arr svg:first-child{animation:none;transform:translateX(36px)}
+.btn:hover .arr svg:last-child{transform:none}
+@keyframes nudge{0%,55%,100%{transform:translateX(0)}75%{transform:translateX(4px)}88%{transform:translateX(0)}}
+.btn.light{background:var(--bone);color:var(--ink)}
+.btn.light .arr{background:var(--ink);color:var(--mint)}
+.btn.ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn.ghost .arr{background:var(--bone);color:var(--ink)}
+.btn.big{font-size:clamp(18px,2vw,24px);padding:12px 12px 12px 38px}
+.btn.big .arr{width:58px;height:58px}
+
+/* ---------- hero ---------- */
+.hero{min-height:100svh;padding:0;background:radial-gradient(900px 640px at calc(78% - var(--p)*45%) 22%,rgba(47,127,134,.5),transparent 62%),radial-gradient(700px 500px at 8% 105%,rgba(168,230,207,.14),transparent 60%),linear-gradient(165deg,#0a171e 0%,#0e2630 100%);color:var(--bone);display:flex;flex-direction:column;overflow:hidden}
+.hero .cols{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(25% - 1px),rgba(236,238,233,.07) calc(25% - 1px),rgba(236,238,233,.07) 25%)}
+.hero .wrap{width:100%;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:clamp(30px,6vh,64px);padding-top:120px;padding-bottom:clamp(28px,5vh,52px)}
+.hero h1{font-size:clamp(58px,14.2vw,250px);line-height:.84}
+.hero h1 .lower{color:var(--mint);padding-right:.1em}
+.hero-row{align-items:end}
+.hero-row p{grid-column:1/6;font-size:clamp(16px,1.4vw,20px);color:rgba(236,238,233,.78);max-width:440px}
+.hero-row .cta{grid-column:6/11}
+.hero-row .sc{grid-column:11/13;justify-self:end;display:flex;align-items:center;gap:12px;color:rgba(236,238,233,.6)}
+.hero-row .sc i{display:block;width:1.5px;height:56px;background:linear-gradient(var(--mint),transparent);animation:drop 2s ease-in-out infinite;transform-origin:top}
+@keyframes drop{0%{transform:scaleY(0)}60%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+.badge{position:absolute;right:calc(var(--g) + 2vw);top:22vh;width:clamp(96px,10vw,150px);aspect-ratio:1;animation:spin 18s linear infinite;z-index:2;opacity:.9}
+.badge text{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.2em;fill:var(--bone);text-transform:uppercase}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- marquee ---------- */
+.mq{background:var(--mint);color:var(--ink);overflow:hidden;padding:20px 0;border-block:1px solid rgba(10,23,30,.2)}
+.mq-t{display:flex;width:max-content;animation:mq 28s linear infinite}
+.mq span{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(26px,4vw,54px);letter-spacing:-.03em;text-transform:uppercase;padding-right:.6em;white-space:nowrap}
+.mq span::after{content:"✦";margin-left:.6em;font-size:.6em;vertical-align:middle}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- section head ---------- */
+.sh{margin-bottom:clamp(50px,7vw,100px);align-items:start}
+.sh .lab{grid-column:1/4;padding-top:.9em;color:var(--teal)}
+.dark .sh .lab{color:var(--mint)}
+.sh h2{grid-column:4/13}
+
+/* ---------- problem rows ---------- */
+.prow{position:relative;grid-template-columns:repeat(12,1fr);display:grid;gap:var(--g);align-items:center;padding:clamp(26px,3.4vw,46px) 0;border-top:1px solid var(--line);transition:color .4s}
+.prow:last-of-type{border-bottom:1px solid var(--line)}
+.prow::before{content:"";position:absolute;top:-1px;bottom:0;left:calc(var(--g)*-1);right:calc(var(--g)*-1);background:var(--ink);transform:scaleY(0);transform-origin:bottom;transition:transform .6s var(--ease);z-index:0}
+.prow>*{position:relative;z-index:1}
+.prow:hover::before{transform:scaleY(1)}
+.prow:hover{color:var(--bone)}
+.prow .st{grid-column:1/5;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(64px,10vw,150px);letter-spacing:-.05em;line-height:.85;font-variant-numeric:tabular-nums}
+.prow .st sup{font-size:.4em;vertical-align:top;color:var(--teal);margin-left:.05em}
+.prow:hover .st sup{color:var(--mint)}
+.prow h3{grid-column:5/9;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(22px,2.4vw,34px);letter-spacing:-.03em;line-height:1.05}
+.prow p{grid-column:9/13;opacity:.72;max-width:360px}
+.note{margin-top:28px;color:rgba(10,23,30,.5)}
+
+/* ---------- calc ---------- */
+.calc{background:radial-gradient(800px 480px at calc(10% + var(--p)*60%) 0%,rgba(47,127,134,.35),transparent 62%),linear-gradient(170deg,#0a171e,#112b35)}
+.calc .l{grid-column:1/7}.calc .r{grid-column:8/13}
+.field{margin-bottom:38px}
+.field label{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:14px;color:rgba(236,238,233,.7)}
+.field b{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:34px;letter-spacing:-.03em;color:var(--bone)}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:2px;background:var(--line-d);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--mint);border:0;cursor:pointer;box-shadow:0 0 0 8px rgba(168,230,207,.18)}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--mint);border:0;cursor:pointer}
+.out-l{color:var(--mint)}
+.out-n{font-family:'Inter Tight',sans-serif;font-weight:800;letter-spacing:-.05em;line-height:.85;font-size:clamp(64px,9.5vw,150px);margin:18px 0 22px;font-variant-numeric:tabular-nums}
+.out-s{color:rgba(236,238,233,.6);max-width:380px;margin-bottom:34px;font-size:14px}
+
+/* ---------- offer ---------- */
+.offer{background:linear-gradient(180deg,var(--paper),var(--bone))}
+.offer .l{grid-column:1/6}.offer .r{grid-column:7/13}
+.offer .l p{font-size:clamp(18px,1.7vw,24px);letter-spacing:-.01em;line-height:1.35;margin-bottom:36px;max-width:440px}
+.inc{list-style:none;counter-reset:i}
+.inc li{counter-increment:i;display:grid;grid-template-columns:48px 1fr;padding:18px 0;border-top:1px solid var(--line);font-family:'Inter Tight',sans-serif;font-weight:600;font-size:clamp(18px,1.7vw,24px);letter-spacing:-.02em;transition:padding-left .5s var(--ease),color .3s}
+.inc li:last-child{border-bottom:1px solid var(--line)}
+.inc li::before{content:"0" counter(i);font-family:'JetBrains Mono',monospace;font-weight:400;font-size:12px;color:var(--teal);padding-top:.5em}
+.inc li:hover{padding-left:14px;color:var(--teal)}
+.steps{margin-top:clamp(70px,9vw,130px)}
+.step{grid-column:span 4;border-top:1.5px solid var(--ink);padding-top:22px}
+.step .n{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(80px,11vw,170px);letter-spacing:-.06em;line-height:.8;color:transparent;-webkit-text-stroke:1.5px var(--ink);transition:color .5s}
+.step:hover .n{color:var(--ink)}
+.step h3{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,38px);letter-spacing:-.035em;text-transform:uppercase;margin:26px 0 8px}
+.step p{opacity:.7;max-width:280px}
+
+/* ---------- work ---------- */
+.work{background:var(--paper)}
+.panel{grid-column:span 6}
+.pn{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3.3;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(20px,2.6vw,40px);transition:transform .8s var(--ease)}
+.panel:hover .pn{transform:scale(.985)}
+.pn.salon{background:linear-gradient(155deg,#f2dcd6,#cf9ea1);color:#33191e}
+.pn.cafe{background:linear-gradient(155deg,#6e4d3a,#2d1c13);color:#f6e6d2}
+.pn nav{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.pn .bn{font-family:'Inter Tight',sans-serif;font-weight:800;font-size:14px;letter-spacing:-.02em}
+.pn h4{font-family:'Inter Tight',sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(34px,4.6vw,72px);letter-spacing:-.045em;line-height:.88;transition:transform .8s var(--ease)}
+.panel:hover .pn h4{transform:translateY(-6px)}
+.pn .row{display:flex;justify-content:space-between;align-items:end;gap:12px}
+.pn .pill{display:inline-block;padding:11px 18px;border-radius:99px;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:13px}
+.salon .pill{background:#33191e;color:#f6e0dc}.cafe .pill{background:#f6e6d2;color:#2d1c13}
+.pn .chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.pn .chips i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:7px 10px;border-radius:99px;border:1px solid currentColor;opacity:.75}
+.cap{display:flex;justify-content:space-between;margin-top:16px;gap:12px;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.02em}
+.cap span{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.55;padding-top:6px}
+
+/* ---------- about ---------- */
+.about{background:radial-gradient(800px 500px at calc(95% - var(--p)*50%) 100%,rgba(47,127,134,.35),transparent 62%),linear-gradient(180deg,#0a171e,#0e2630)}
+.about .big{grid-column:4/13;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(28px,4.2vw,66px);letter-spacing:-.04em;line-height:1.02}
+.about .lk{grid-column:4/13;display:flex;gap:14px;flex-wrap:wrap;margin-top:clamp(36px,5vw,64px)}
+
+/* ---------- faq ---------- */
+.faq{background:var(--bone)}
+.faq .list{grid-column:4/13}
+details{border-top:1px solid var(--line)}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:56px 1fr 30px;align-items:center;padding:26px 0;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:clamp(20px,2.2vw,32px);letter-spacing:-.03em;transition:color .3s}
+summary::-webkit-details-marker{display:none}
+summary small{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:12px;color:var(--teal)}
+summary::after{content:"";width:16px;height:16px;justify-self:end;background:linear-gradient(currentColor,currentColor) center/100% 1.5px no-repeat,linear-gradient(currentColor,currentColor) center/1.5px 100% no-repeat;transition:transform .5s var(--ease)}
+details[open] summary::after{transform:rotate(45deg)}
+summary:hover{color:var(--teal)}
+details p{padding:0 56px 28px 56px;max-width:640px;opacity:.72}
+
+/* ---------- final ---------- */
+.final{background:radial-gradient(900px 520px at 50% calc(0% + var(--p)*30%),rgba(47,127,134,.42),transparent 66%),linear-gradient(170deg,#0a171e,#123039);color:var(--bone);padding-bottom:0;overflow:hidden}
+.final h2{font-size:clamp(52px,12vw,210px);line-height:.84;margin-bottom:clamp(36px,5vw,70px)}
+.final .row{align-items:end;padding-bottom:clamp(50px,7vw,100px)}
+.final .row p{grid-column:1/6;max-width:380px;color:rgba(236,238,233,.7);font-size:18px}
+.final .row .cta{grid-column:6/13}
+.foot{border-top:1px solid var(--line-d);padding:26px 0 0}
+.foot .grid{align-items:center;padding-bottom:26px;color:rgba(236,238,233,.65)}
+.foot .a{grid-column:1/5}.foot .b{grid-column:5/9;display:flex;gap:26px}.foot .c{grid-column:9/13;text-align:right}
+.foot a:hover{color:var(--mint)}
+.word{font-family:'Kaushan Script',cursive;font-size:clamp(96px,24vw,400px);line-height:.9;white-space:nowrap;color:var(--bone);opacity:.95;padding:clamp(20px,3vw,40px) 0 0;margin-bottom:-.08em;letter-spacing:-.01em}
+.word .ind{padding-left:.9em}
+.hd .tag{transition:opacity .5s}
+body.scrolled .hd .tag{opacity:0}
+
+/* ---------- misc ---------- */
+.progress{position:fixed;top:0;left:0;height:3px;width:calc(var(--p)*100%);z-index:9500;background:linear-gradient(90deg,var(--teal),var(--mint))}
+.cursor{position:fixed;left:0;top:0;z-index:9800;pointer-events:none;display:none}
+.cursor i{position:absolute;left:0;top:0;width:12px;height:12px;border-radius:50%;background:var(--mint);transform:translate(-50%,-50%);transition:width .45s var(--ease),height .45s var(--ease);display:grid;place-items:center;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:0;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);mix-blend-mode:normal}
+.cursor.big i{width:96px;height:96px;font-size:11px}
+.has-cursor .cursor{display:block}
+.has-cursor,.has-cursor a,.has-cursor button,.has-cursor summary{cursor:none}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:450;padding:12px 14px calc(12px + env(safe-area-inset-bottom));display:none;transform:translateY(120%);transition:transform .6s var(--ease)}
+.sticky.show{transform:none}
+.sticky .btn{width:100%;justify-content:space-between;box-shadow:0 14px 34px -10px rgba(10,23,30,.5)}
+
+@media (max-width:900px){
+  .hd .tag{display:none}
+  .sh .lab,.sh h2,.calc .l,.calc .r,.offer .l,.offer .r,.about .big,.about .lk,.faq .list,.final .row p,.final .row .cta,.foot .a,.foot .b,.foot .c{grid-column:1/-1}
+  .sh .lab{padding:0 0 14px}
+  .hero-row p,.hero-row .cta{grid-column:1/-1}.hero-row .sc{display:none}
+  .badge{top:15vh;right:var(--g);width:84px}
+  .prow .st{grid-column:1/-1}.prow h3{grid-column:1/-1}.prow p{grid-column:1/-1}
+  .prow{gap:10px}
+  .step{grid-column:1/-1;margin-bottom:20px}
+  .panel{grid-column:1/-1}
+  .calc .r{margin-top:30px}.offer .r{margin-top:44px}
+  .foot .c{text-align:left}.foot .b{flex-wrap:wrap}
+  .sticky{display:block}
+  summary{grid-template-columns:40px 1fr 24px}details p{padding:0 0 24px 40px}
+  .final .row .cta{margin-top:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ln>span,.wi,.fu{transition:none;transform:none;opacity:1}.btn .arr svg:first-child,.badge,.mq-t{animation:none}
+}
+</style>
+</head>
+<body class="lock">
+<div class="progress"></div>
+<div class="cursor"><i></i></div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="ld-top mono"><span>Abrish Arshad</span><span>Websites for salons &amp; cafes</span></div>
+  <div class="ld-mid"><div class="ld-logo"><span>abrish</span><span>arshad</span></div></div>
+  <div class="ld-bot"><div class="ld-count"><span id="cnt">0</span><i>%</i></div><div class="ld-bar"><b id="bar"></b></div></div>
+</div>
+
+<!-- HEADER + MENU -->
+<header class="hd">
+  <a class="lg" href="#top" aria-label="Abrish Arshad"><span>abrish</span><span>arshad</span></a>
+  <span class="tag mono">Open for projects · Oct '26</span>
+  <button class="mn" id="mn" aria-label="Menu"><span id="mnt">Menu</span><i></i></button>
+</header>
+<nav class="menu" id="menu" aria-label="Main">
+  <ol>
+    <li><a href="#top" data-m><span class="ml"><span><small>01</small>Home</span></span></a></li>
+    <li><a href="#problem" data-m><span class="ml"><span><small>02</small>Problem</span></span></a></li>
+    <li><a href="#offer" data-m><span class="ml"><span><small>03</small>Offer</span></span></a></li>
+    <li><a href="#work" data-m><span class="ml"><span><small>04</small>Concepts</span></span></a></li>
+    <li><a href="#contact" data-m><span class="ml"><span><small>05</small>Contact</span></span></a></li>
+  </ol>
+  <div class="menu-foot mono">
+    <a href="https://ig.me/m/vibecoding_with_abrish" target="_blank" rel="noopener">Instagram ↗</a>
+    <a href="https://www.linkedin.com/in/abrish-arshad-640098443/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <span>© <span class="yr">2026</span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="cols"></div>
+  <svg class="badge" viewBox="0 0 120 120" aria-hidden="true">
+    <defs><path id="c" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+    <text><textPath href="#c">Salons ✦ Cafes ✦ Barbers ✦ Bakeries ✦ </textPath></text>
+    <path d="M60 46v26M50 63l10 10 10-10" fill="none" stroke="#a8e6cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="wrap">
+    <h1 class="disp rvl" data-hero>
+      <span class="ln" style="--i:0"><span>Searched.</span></span>
+      <span class="ln" style="--i:1"><span>Found.</span></span>
+      <span class="ln" style="--i:2"><span class="lower">booked.</span></span>
+    </h1>
+    <div class="grid hero-row">
+      <p class="words" data-hero>Websites for salons and cafes that turn nearby searches into bookings and walk-ins.</p>
+      <div class="cta fu" data-hero style="--d:500ms"><a class="btn" data-cursor="DM" href="https://ig.me/m/vibecoding_with_abrish" target="_blank" rel="noopener"><span class="t">Message me on Instagram</span></a></div>
+      <div class="sc mono fu" data-hero style="--d:700ms">Scroll<i></i></div>
+    </div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="mq-t">
+  <span>Salons</span><span>Cafes</span><span>Barbers</span><span>Bakeries</span><span>Spas</span><span>Boutiques</span>
+  <span>Salons</span><span>Cafes</span><span>Barbers</span><span>Bakeries</span><span>Spas</span><span>Boutiques</span>
+</div></div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="wrap">
+    <div class="grid sh">
+      <div class="lab mono fu">(01) The problem</div>
+      <h2 class="disp rvl"><span class="ln" style="--i:0"><span>Where customers</span></span><span class="ln" style="--i:1"><span>quietly leave.</span></span></h2>
+    </div>
+    <div class="rvl">
+      <div class="prow fu" data-cursor="Fix it">
+        <div class="st"><span data-count="71">71</span><sup>%</sup></div>
+        <h3>Can't book easily</h3>
+        <p>of salon regulars skipped booking when it was hard to reach someone or book online.</p>
+      </div>
+      <div class="prow fu" data-cursor="Fix it" style="--d:120ms">
+        <div class="st"><span data-count="53">53</span><sup>%</sup></div>
+        <h3>Slow on phones</h3>
+        <p>of mobile visitors leave if a page takes more than three seconds to load.</p>
+      </div>
+      <div class="prow fu" data-cursor="Fix it" style="--d:240ms">
+        <div class="st"><span data-count="70">70</span><sup>%</sup></div>
+        <h3>No clear next step</h3>
+        <p>of small business websites have no clear call to action on the homepage.</p>
+      </div>
+    </div>
+    <p class="note mono">Sources: Zenoti salon booking survey · Google mobile speed research · Sweor 2025</p>
+  </div>
+</section>
+
+<!-- CALC -->
+<section class="calc dark">
+  <div class="wrap">
+    <div class="grid sh">
+      <div class="lab mono fu">(02) The cost</div>
+      <h2 class="disp rvl"><span class="ln" style="--i:0"><span>What is waiting</span></span><span class="ln" style="--i:1"><span class="accent lower">costing you?</span></span></h2>
+    </div>
+    <div class="grid">
+      <div class="l fu">
+        <div class="field"><label class="mono">Customers you miss per week <b id="v1">5</b></label><input type="range" id="r1" min="1" max="40" value="5"></div>
+        <div class="field"><label class="mono">Average spend per visit <b id="v2">$30</b></label><input type="range" id="r2" min="5" max="200" step="5" value="30"></div>
+        <div class="field"><label class="mono">Visits a year if they return <b id="v3">6</b></label><input type="range" id="r3" min="1" max="24" value="6"></div>
+      </div>
+      <div class="r fu" style="--d:150ms">
+        <div class="out-l mono">Possible revenue missed / year</div>
+        <div class="out-n" id="out">$0</div>
+        <p class="out-s" id="sub"></p>
+        <a class="btn light" data-cursor="DM" href="https://ig.me/m/vibecoding_with_abrish" target="_blank" rel="noopener"><span class="t">Message me on Instagram</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="offer" id="offer">
+  <div class="wrap">
+    <div class="grid sh">
+      <div class="lab mono fu">(03) The offer</div>
+      <h2 class="disp rvl"><span class="ln" style="--i:0"><span>One site.</span></span><span class="ln" style="--i:1"><span class="lower" style="color:var(--teal)">done for you.</span></span></h2>
+    </div>
+    <div class="grid">
+      <div class="l">
+        <p class="words">You tell me about your business. I build the website that gets people to book, call or walk in.</p>
+        <div class="fu"><a class="btn" data-cursor="DM" href="https://ig.me/m/vibecoding_with_abrish" target="_blank" rel="noopener"><span class="t">Message me on Instagram</span></a></div>
+      </div>
+      <ul class="r inc rvl">
+        <li class="fu">Custom design in your brand</li>
+        <li class="fu" style="--d:70ms">Fast, mobile-first build</li>
+        <li class="fu" style="--d:140ms">Book, call and directions buttons</li>
+        <li class="fu" style="--d:210ms">Services or menu as real text</li>
+        <li class="fu" style="--d:280ms">Local SEO basics</li>
+        <li class="fu" style="--d:350ms">You own domain, hosting and code</li>
+      </ul>
+    </div>
+    <div class="grid steps rvl">
+      <div class="step fu"><div class="n">1</div><h3>Send a DM</h3><p>Two minutes. Tell me what you run.</p></div>
+      <div class="step fu" style="--d:120ms"><div class="n">2</div><h3>I build it</h3><p>AI-assisted, hand-checked on real phones.</p></div>
+      <div class="step fu" style="--d:240ms"><div class="n">3</div><h3>You go live</h3><p>On your own domain, ready for bookings.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="grid sh">
+      <div class="lab mono fu">(04) Concepts</div>
+      <h2 class="disp rvl"><span class="ln" style="--i:0"><span>Built for how</span></span><span class="ln" style="--i:1"><span>people search.</span></span></h2>
+    </div>
+    <div class="grid">
+      <div class="panel fu" data-cursor="Concept">
+        <div class="pn salon">
+          <nav><span class="bn">Rosewood</span><span>Services · Book</span></nav>
+          <h4>Hair you'll<br>love. Booked<br>in 30 sec.</h4>
+          <div class="row"><span class="pill">Book appointment</span><div class="chips"><i>Cut</i><i>Colour</i><i>Bridal</i></div></div>
+        </div>
+        <div class="cap">Salon<span>Concept design</span></div>
+      </div>
+      <div class="panel fu" data-cursor="Concept" style="--d:140ms">
+        <div class="pn cafe">
+          <nav><span class="bn">Brew &amp; Bloom</span><span>Menu · Find us</span></nav>
+          <h4>Coffee worth<br>the walk.</h4>
+          <div class="row"><span class="pill">See today's menu</span><div class="chips"><i>Open now</i><i>Directions</i></div></div>
+        </div>
+        <div class="cap">Cafe<span>Concept design</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about dark">
+  <div class="wrap">
+    <div class="grid sh" style="margin-bottom:clamp(30px,4vw,56px)">
+      <div class="lab mono fu">(05) About</div>
+    </div>
+    <div class="grid">
+      <p class="big scrub">I'm Abrish. I build fast, clean websites for local businesses with AI-assisted vibe coding, and I'm growing into AI engineering one Python project at a time.</p>
+      <div class="lk fu">
+        <a class="btn light" data-cursor="DM" href="https://ig.me/m/vibecoding_with_abrish" target="_blank" rel="noopener"><span class="t">Message me on Instagram</span></a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/abrish-arshad-640098443/" target="_blank" rel="noopener"><span class="t">LinkedIn</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="wrap">
+    <div class="grid sh">
+      <div class="lab mono fu">(06) Questions</div>
+      <h2 class="disp rvl"><span class="ln" style="--i:0"><span>Quick answers.</span></span></h2>
+    </div>
+    <div class="grid"><div class="list rvl">
+      <details class="fu"><summary><small>01</small>How much does it cost?</summary><p>You get a clear fixed quote in the DM. No surprise add-ons, and any ongoing cost like domain renewal is explained upfront.</p></details>
+      <details class="fu" style="--d:70ms"><summary><small>02</small>How long does it take?</summary><p>Much faster than a typical agency. Your quote includes a specific timeline.</p></details>
+      <details class="fu" style="--d:140ms"><summary><small>03</small>Is an AI-built site good quality?</summary><p>AI speeds up the build. I direct it, test it on real phones and fix what needs fixing.</p></details>
+      <details class="fu" style="--d:210ms"><summary><small>04</small>Do I own the website?</summary><p>Yes. Domain, hosting and code are set up in your name.</p></details>
+    </div></div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final" id="contact">
+  <div class="wrap">
+    <h2 class="disp rvl">
+      <span class="ln" style="--i:0"><span>Let's get</span></span>
+      <span class="ln" style="--i:1"><span class="lower accent">you found.</span></span>
+    </h2>
+    <div class="grid row">
+      <p class="words">One message is all it takes. Send "WEBSITE" and we'll talk about your salon or cafe.</p>
+      <div class="cta fu"><a class="btn light big" data-cursor="DM" href="https://ig.me/m/vibecoding_with_abrish" target="_blank" rel="noopener"><span class="t">Message me on Instagram</span></a></div>
+    </div>
+    <div class="foot">
+      <div class="grid mono">
+        <div class="a">© <span class="yr">2026</span> Abrish Arshad</div>
+        <div class="b"><a href="https://www.instagram.com/vibecoding_with_abrish?xtok=ZzRoOHZrZWk4YXg=" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/in/abrish-arshad-640098443/" target="_blank" rel="noopener">LinkedIn</a></div>
+        <div class="c"><a href="#top">Back to top ↑</a></div>
+      </div>
+      <div class="word rvl" aria-hidden="true"><span class="ln" style="--i:0"><span>abrish</span></span><span class="ln" style="--i:1"><span class="ind">arshad</span></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="sticky" id="sticky"><a class="btn" href="https://ig.me/m/vibecoding_with_abrish" target="_blank" rel="noopener"><span class="t">Message me on Instagram</span></a></div>
+
+<script>
+(function(){
+  var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  $$('.btn').forEach(function(b){var a=document.createElement('span');a.className='arr';a.innerHTML=arrow+arrow;b.appendChild(a)});
+  $$('.yr').forEach(function(y){y.textContent=new Date().getFullYear()});
+
+  /* split paragraphs into masked words */
+  $$('.words').forEach(function(p){
+    var t=p.textContent.trim().split(/\s+/);p.innerHTML='';
+    t.forEach(function(w,i){var m=document.createElement('span');m.className='wm';var s=document.createElement('span');s.className='wi';s.style.setProperty('--w',i);s.textContent=w;m.appendChild(s);p.appendChild(m);p.appendChild(document.createTextNode(' '))});
+  });
+  /* scrub paragraph words */
+  var sc=$('.scrub'),sw=[];
+  if(sc){var t=sc.textContent.trim().split(/\s+/);sc.innerHTML='';t.forEach(function(w){var s=document.createElement('span');s.className='w';s.textContent=w;sc.appendChild(s);sc.appendChild(document.createTextNode(' '));sw.push(s)})}
+  function scrub(){
+    if(!sc)return;var r=sc.getBoundingClientRect(),h=innerHeight;
+    var pr=Math.min(1,Math.max(0,(h*.85-r.top)/(r.height+h*.3)));
+    sw.forEach(function(w,i){w.style.opacity=Math.min(1,Math.max(.16,(pr*sw.length*1.15-i)+.16))});
+  }
+
+  /* reveal on scroll (hero waits for loader) */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+  $$('.rvl,.fu,.words,details,.prow,.panel').forEach(function(el){if(!el.closest('.hero'))io.observe(el)});
+
+  /* count up */
+  function countUp(el){var to=+el.getAttribute('data-count'),t0=performance.now();(function f(n){var k=Math.min(1,(n-t0)/1400);el.textContent=Math.round(to*(1-Math.pow(1-k,4)));if(k<1)requestAnimationFrame(f)})(t0)}
+  var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target)}})},{threshold:.6});
+  $$('[data-count]').forEach(function(el){el.textContent='0';cio.observe(el)});
+
+  /* calculator */
+  var r1=$('#r1'),r2=$('#r2'),r3=$('#r3');
+  function fmt(n){return '$'+Math.round(n).toLocaleString('en-US')}
+  function calc(){
+    var a=+r1.value,b=+r2.value,c=+r3.value;
+    $('#v1').textContent=a;$('#v2').textContent='$'+b;$('#v3').textContent=c;
+    $('#out').textContent=fmt(a*52*b*(1+(c-1)*.25));
+    $('#sub').textContent=a+' missed customers a week at '+fmt(b)+' each, with repeat visits counted at 25%. An estimate to help you think.';
+  }
+  [r1,r2,r3].forEach(function(r){r.addEventListener('input',calc)});calc();
+
+  /* scroll: progress, gradient variable, sticky cta, scrub */
+  var root=document.documentElement,st=$('#sticky'),tick=false;
+  function onScroll(){
+    var max=root.scrollHeight-innerHeight,p=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
+    root.style.setProperty('--p',p.toFixed(4));
+    st.classList.toggle('show',scrollY>innerHeight*.7);
+    document.body.classList.toggle('scrolled',scrollY>160);
+    scrub();tick=false;
+  }
+  addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});
+  addEventListener('resize',onScroll);onScroll();
+
+  /* menu */
+  var mn=$('#mn'),mt=$('#mnt');
+  function toggle(f){var o=typeof f==='boolean'?f:!document.body.classList.contains('menu-open');document.body.classList.toggle('menu-open',o);mt.textContent=o?'Close':'Menu'}
+  mn.addEventListener('click',function(){toggle()});
+  $$('[data-m]').forEach(function(a){a.addEventListener('click',function(){toggle(false)})});
+  addEventListener('keydown',function(e){if(e.key==='Escape')toggle(false)});
+
+  /* custom cursor with labels */
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!reduce){
+    var cur=$('.cursor'),dot=$('i',cur),x=innerWidth/2,y=innerHeight/2,tx=x,ty=y;
+    document.body.classList.add('has-cursor');
+    addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY});
+    (function loop(){x+=(tx-x)*.2;y+=(ty-y)*.2;cur.style.transform='translate3d('+x+'px,'+y+'px,0)';requestAnimationFrame(loop)})();
+    document.addEventListener('mouseover',function(e){
+      var t=e.target.closest('[data-cursor]');
+      if(t){dot.textContent=t.getAttribute('data-cursor');cur.classList.add('big')}
+      else if(e.target.closest('a,button,summary')){dot.textContent='';cur.classList.remove('big');dot.style.width=dot.style.height='34px'}
+    });
+    document.addEventListener('mouseout',function(e){if(!e.relatedTarget||!e.relatedTarget.closest||!e.relatedTarget.closest('[data-cursor]')){cur.classList.remove('big');dot.textContent=''}if(!e.relatedTarget||!e.relatedTarget.closest('a,button,summary')){dot.style.width=dot.style.height=''}});
+  }
+
+  /* loader */
+  var loader=$('#loader'),cnt=$('#cnt'),bar=$('#bar');
+  function reveal(){
+    document.body.classList.remove('lock');
+    $$('.hero [data-hero], .hero .rvl').forEach(function(el){el.classList.add('in')});
+    setTimeout(function(){loader.remove()},1300);
+  }
+  function finish(){loader.classList.add('out');setTimeout(reveal,750)}
+  if(reduce){loader.remove();document.body.classList.remove('lock');$$('.hero [data-hero]').forEach(function(el){el.classList.add('in')})}
+  else{
+    var t0=performance.now(),dur=2600;
+    var fontsReady=(document.fonts&&document.fonts.ready)?Promise.race([document.fonts.ready,new Promise(function(r){setTimeout(r,3500)})]):Promise.resolve();
+    (function step(n){
+      var k=Math.min(1,(n-t0)/dur),e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2,v=Math.round(e*100);
+      cnt.textContent=v;bar.style.transform='scaleX('+(v/100)+')';
+      if(k<1)requestAnimationFrame(step);else setTimeout(function(){fontsReady.then(finish)},250);
+    })(t0);
+  }
+})();
+</script>
+</body>
+</html>
